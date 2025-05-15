@@ -1,4 +1,10 @@
-export const PokemonDetail = ({ pokemon, id, handleAnterior, handleSiguiente }) => {
+export const PokemonDetail = ({
+  pokemon,
+  id,
+  handleAnterior,
+  handleSiguiente,
+}) => {
+
   return (
     <>
       {pokemon && (
@@ -19,9 +25,7 @@ export const PokemonDetail = ({ pokemon, id, handleAnterior, handleSiguiente }) 
           <h3>Habilidades</h3>
           <ul>
             {pokemon.abilities.map((abilityObj) => (
-              <li key={abilityObj.ability.name}>
-                {abilityObj.ability.name}
-              </li>
+              <li key={abilityObj.ability.name}>{abilityObj.ability.name}</li>
             ))}
           </ul>
 

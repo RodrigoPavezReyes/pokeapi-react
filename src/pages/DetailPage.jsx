@@ -4,36 +4,60 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const DetailPage = () => {
-  const { id } = useParams();
+  const { id } = useParams();  // ⬅️ id viene de la URL y puede ser nombre o número
   const navigate = useNavigate(); // ⬅️ para cambiar la URL
 
   const [pokemon, setPokemon] = useState(null);
-  const currentId = Number(id); // ya no usamos setCurrentId
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+ 
+
+  const numericId = Number(pokemon?.id || 0); // para Anterior/Siguiente
 
   const handleAnterior = () => {
-    if (currentId > 1) {
-      navigate(`/pokemon/${currentId - 1}`); // ⬅️ actualiza URL
+    if (numericId > 1) {
+      navigate(`/pokemon/${numericId - 1}`); // ⬅️ actualiza URL
     }
   };
 
   const handleSiguiente = () => {
-    navigate(`/pokemon/${currentId + 1}`); // ⬅️ actualiza URL
+    navigate(`/pokemon/${numericId + 1}`); // ⬅️ actualiza URL
   };
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${currentId}`)
-      .then((res) => res.json())
-      .then((data) => setPokemon(data));
-  }, [currentId]);
+    const fetchPokemon = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id.toLowerCase()}`);
+        if (!res.ok) throw new Error("Pokémon no encontrado");
+        const data = await res.json();
+        setPokemon(data);
+      } catch (err) {
+        setError(err.message);
+        setPokemon(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPokemon();
+  }, [id]);
 
   return (
     <>
-      <PokemonDetail
-        pokemon={pokemon}
-        id={currentId}
-        handleAnterior={handleAnterior}
-        handleSiguiente={handleSiguiente}
-      />
+      {loading && <p>Cargando...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {!loading && pokemon && (
+        <>
+          <PokemonDetail
+            pokemon={pokemon}
+            id={numericId}
+            handleAnterior={handleAnterior}
+            handleSiguiente={handleSiguiente}
+          />
+        </>
+      )}
       <hr />
       <Link to="/">
         <button>Volver Home</button>
