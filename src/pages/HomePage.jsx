@@ -5,7 +5,7 @@ export const HomePage = () => {
 
     const [currentList, setCurrentList] = useState({})
 
-    const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?limit=5&offset=0");
+    const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?limit=15&offset=0");
     const [nextUrl, setNextUrl] = useState("")
     const [prevUrl, setPrevUrl] = useState("")
 

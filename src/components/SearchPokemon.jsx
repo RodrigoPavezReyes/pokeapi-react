@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +22,7 @@ export const SearchPokemon = () => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button type="submit">Buscar</button>
+      <Button variant="outlined" type="submit" >Buscar</Button>
     </form>
   );
 };

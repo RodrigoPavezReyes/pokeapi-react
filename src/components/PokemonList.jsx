@@ -1,3 +1,4 @@
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,14 +21,41 @@ export const PokemonList = ({ currentList }) => {
   }, [currentList])
 
   return (
-    <>
-      {detailedList.map((pokemon) => (
-        <div key={pokemon.id} style={{ border: '1px solid #ccc', padding: 10, margin: 10 }}>
-          <h2>{pokemon.name}</h2>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-          <button onClick={() => navigate(`/pokemon/${pokemon.id}`)}>Detalles</button>
-        </div>
-      ))}
-    </>
+    
+    <Grid container spacing={12} justifyContent="center" rowSpacing={4} >
+        {detailedList.map((pokemon) => (
+
+        <Grid  key={pokemon.id} xs={12} sm={6} md={4} lg={3}>  
+        <Card 
+        sx={{ 
+            transition: "0.2s",
+            "&:hover":{
+                transform:"scale(1.05)",
+            },
+            }}>
+        <CardActionArea>
+        <CardContent>
+          <Typography align="center" variant='h6' sx={{ textTransform: 'uppercase' }}>{pokemon.name}</Typography>
+          
+          <CardMedia 
+            component={"img"}
+            image={pokemon.sprites.front_default || "/fallback.png"}
+            onError={(e) => e.target.src = "/fallback.png"}
+            alt={pokemon.name}
+            sx={{ width: 100, height: 100, margin: '0 auto' }}
+           />
+              </CardContent>
+        </CardActionArea>  
+        
+           <CardActions sx={{ justifyContent: 'center' }}>
+                <Button  variant="contained" onClick={() => navigate(`/pokemon/${pokemon.id}`)}>Detalles</Button>
+            </CardActions>
+     
+        
+        </Card> 
+       </Grid>
+      ))} 
+    </Grid>
+    
   )
 }
