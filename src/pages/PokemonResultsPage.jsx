@@ -93,7 +93,7 @@ export const PokemonResultsPage = () => {
       )}
 
       <Box sx={{ textAlign: 'center', mt: 4 }}>
-        <Button component={Link} to="/app-react-pokedex" variant="outlined">
+        <Button component={Link} to="/pokeapi-react" variant="outlined">
           Volver Home
         </Button>
       </Box>
