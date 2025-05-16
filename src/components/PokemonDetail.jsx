@@ -23,7 +23,7 @@ export const PokemonDetail = ({
             <Typography
               align="center"
               variant="h3"
-              sx={{ textTransform: 'uppercase', mb: 2 }}
+              sx={{ textTransform: 'uppercase', mb: 3 }}
             >
               {pokemon.name}
             </Typography>
