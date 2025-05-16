@@ -27,7 +27,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/resultados" element={<PokemonResultsPage />} />
-          <Route path="/PokedexReact" element={<HomePage />} />
+          <Route path="/pokedex-react" element={<HomePage />} />
           <Route path="/pokemon/:id" element={<DetailPage />} />
         </Routes>
       </BrowserRouter>
