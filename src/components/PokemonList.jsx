@@ -24,7 +24,7 @@ export const PokemonList = ({ currentList }) => {
   }, [currentList])
 
   return (
-  <Grid container columnSpacing={10} rowSpacing={4} sx={{ width: '100%', marginTop: '2rem', marginBottom:"2rem" }}>
+  <Grid container columnSpacing={10} rowSpacing={4} justifyContent="center" sx={{ width: '100%', marginTop: '2rem', marginBottom:"2rem" }}>
     {detailedList.map((pokemon) => (
       <Grid key={pokemon.id} xs={12} sm={6} md={4} lg={3}>
         <motion.div
@@ -36,6 +36,7 @@ export const PokemonList = ({ currentList }) => {
           <Card
   sx={{
     width: '10rem',
+    height:"14.5rem",
     transition: '0.2s',
     '&:hover': {
       transform: 'scale(1.05)',
