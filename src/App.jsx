@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { DetailPage } from "./pages/DetailPage";
-import { SearchPokemon } from "./components/SearchPokemon";
-import { PokemonFilterCombined } from "./components/PokemonFilterCombined";
 import { PokemonResultsPage } from "./pages/PokemonResultsPage";
 import { NavBar } from "./components/NavBar";
 import { Container } from "@mui/material";
@@ -11,7 +9,7 @@ import { motion } from 'framer-motion';
 function App() {
   return (
     <motion.div
-      initial={{ backgroundPosition: '0% 50%' }}
+      initial={{ backgroundPosition: '0% 0%' }}
   animate={{ backgroundPosition: '100% 50%' }}
   transition={{
     duration: 30,

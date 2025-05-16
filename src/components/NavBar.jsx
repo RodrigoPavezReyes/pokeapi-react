@@ -8,7 +8,7 @@ import logo from "../assets/logo.svg";
 export const NavBar = () => {
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
   <Link to="/" style={{ textDecoration: "none" }}>
     <Box
       component="img"
