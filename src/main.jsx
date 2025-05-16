@@ -9,8 +9,8 @@ import './index.css'
 import { CssBaseline } from '@mui/material';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <>
     <CssBaseline />{/*   Resetea los estilos por defecto del navegador a Roboto */}
     <App />
-  </StrictMode>,
+  </>
 )
