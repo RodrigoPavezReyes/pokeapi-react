@@ -6,9 +6,24 @@ import { PokemonFilterCombined } from "./components/PokemonFilterCombined";
 import { PokemonResultsPage } from "./pages/PokemonResultsPage";
 import { NavBar } from "./components/NavBar";
 import { Container } from "@mui/material";
+import { motion } from 'framer-motion';
 
 function App() {
   return (
+    <motion.div
+      initial={{ backgroundPosition: '0% 50%' }}
+  animate={{ backgroundPosition: '100% 50%' }}
+  transition={{
+    duration: 30,
+    repeat: Infinity,
+    ease: 'linear',
+  }}
+  style={{
+    minHeight: '100vh',
+    background: 'linear-gradient(270deg, #f3ec78,rgb(228, 132, 48))',
+    backgroundSize: '400% 400%',
+  }}
+    >
     <Container>
       <BrowserRouter>
         <NavBar />
@@ -19,6 +34,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Container>
+    </motion.div>
   );
 }
 

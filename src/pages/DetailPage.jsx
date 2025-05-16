@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { PokemonDetail } from "../components/PokemonDetail";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export const DetailPage = () => {
   const { id } = useParams();  // ⬅️ id viene de la URL y puede ser nombre o número
@@ -58,10 +59,11 @@ export const DetailPage = () => {
           />
         </>
       )}
-      <hr />
-      <Link to="/">
-        <button>Volver Home</button>
-      </Link>
+      <Link to="/" style={{ textDecoration: "none" }}>
+  <Button variant="contained" color="primary">
+    Volver Home
+  </Button>
+</Link>
     </>
   );
 };

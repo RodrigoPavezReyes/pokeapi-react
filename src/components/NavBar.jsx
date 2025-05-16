@@ -1,16 +1,26 @@
-import React from 'react'
-import { SearchPokemon } from './SearchPokemon'
-import { PokemonFilterCombined } from './PokemonFilterCombined'
-import { Link } from 'react-router-dom'
-import { Typography } from '@mui/material'
+import React from "react";
+import { SearchPokemon } from "./SearchPokemon";
+import { PokemonFilterCombined } from "./PokemonFilterCombined";
+import { Link } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import logo from "../assets/logo.svg";
 
 export const NavBar = () => {
   return (
     <>
-    <Typography variant="h2"align="center" ><Link to="/" >POKEMON APP</Link></Typography>
-    
-    <SearchPokemon/>
-     <PokemonFilterCombined />
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+  <Link to="/" style={{ textDecoration: "none" }}>
+    <Box
+      component="img"
+      src={logo}
+      alt="Logo"
+      sx={{ width: 250, height: "auto", cursor: "pointer", mr: 3}}
+    />
+  </Link>
+  <SearchPokemon />
+</Box>
+
+      <PokemonFilterCombined />
     </>
-  )
-}
+  );
+};

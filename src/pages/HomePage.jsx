@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PokemonList } from '../components/PokemonList'
+import { Box, Button } from '@mui/material';
 
 export const HomePage = () => {
 
@@ -37,11 +38,17 @@ export const HomePage = () => {
     
 
   return (
-    <div>
-        <PokemonList currentList={currentList}  />
-        <hr />
-        <button onClick={handleAnterior}>Anterior</button>
-        <button onClick={handleSiguiente}>Siguiente</button>
-    </div>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, mt: 4 }}>
+  <PokemonList currentList={currentList} />
+
+  <Box sx={{ display: 'flex', gap: 2 }}>
+    <Button variant="contained" color="primary" onClick={handleAnterior}>
+      Anterior
+    </Button>
+    <Button variant="contained" color="primary" onClick={handleSiguiente}>
+      Siguiente
+    </Button>
+  </Box>
+</Box>
   )
 }

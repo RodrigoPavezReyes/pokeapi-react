@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Button,
+  CircularProgress,
+} from '@mui/material';
 
 export const PokemonResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -28,24 +39,65 @@ export const PokemonResultsPage = () => {
   }, [searchParams]);
 
   return (
-    <div>
-      <h2>Resultados del filtro</h2>
+    <Box sx={{ p: 2, width: '100%' }}>
+      <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>
+        Resultados del filtro
+      </Typography>
+
       {detailedList.length === 0 ? (
-        <p>Cargando Pokémon...</p>
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
+          <CircularProgress />
+          <Typography sx={{ ml: 2 }}>Cargando Pokémon...</Typography>
+        </Box>
       ) : (
-        detailedList.map((pokemon) => (
-          <div key={pokemon.id} style={{ border: "1px solid #ccc", padding: 10, margin: 10 }}>
-            <h2>{pokemon.name}</h2>
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            <button onClick={() => navigate(`/pokemon/${pokemon.id}`)}>Ver detalles</button>
-          </div>
-        ))
+        <Grid container spacing={2}>
+          {detailedList.map((pokemon) => (
+            <Grid key={pokemon.id} xs={12} sm={6} md={4} lg={3}>
+              <Card
+                sx={{
+                    width: '10rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: '0.2s',
+                  '&:hover': { transform: 'scale(1.03)' },
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  image={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  sx={{ width: 120, height: 120, mx: 'auto', mt: 2 }}
+                />
+                <CardContent sx={{ textAlign: 'center', flexGrow: 1 }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ textTransform: 'uppercase' }}
+                  >
+                    {pokemon.name}
+                  </Typography>
+                </CardContent>
+                <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => navigate(`/pokemon/${pokemon.id}`)}
+                  >
+                    Ver detalles
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       )}
-      <hr />
-      <Link to="/">
-        <button>Volver Home</button>
-      </Link>
-    </div>
+
+      <Box sx={{ textAlign: 'center', mt: 4 }}>
+        <Button component={Link} to="/" variant="outlined">
+          Volver Home
+        </Button>
+      </Box>
+    </Box>
     
   );
 };

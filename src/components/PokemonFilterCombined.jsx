@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+} from '@mui/material';
 
 export const PokemonFilterCombined = () => {
   const [types, setTypes] = useState([]);
@@ -66,35 +75,74 @@ export const PokemonFilterCombined = () => {
 };
 
   return (
-    <div>
-      <h2>Filtrar Pokémon por tipo y habilidad</h2>
+    <Box sx={{ p: 2, width: '100%', borderRadius: 2,  }}>
+      {/* Título */}
+      <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>
+        Encuentra tu Pokemon por Tipo y Habilidad
+      </Typography>
 
-      <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-        <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
-          <option value="">-- Selecciona un tipo --</option>
-          {types.map((type) => (
-            <option key={type.name} value={type.name}>
-              {type.name}
-            </option>
-          ))}
-        </select>
+      {/* Controles de filtro */}
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', mb: 2 }}>
+        
+        {/* Select de tipo */}
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="label-tipo">Tipo</InputLabel>
+          <Select
+            labelId="label-tipo"
+            value={selectedType}
+            label="Tipo"
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            <MenuItem value="">
+              <em>Todos</em>
+            </MenuItem>
+            {types.map((t) => (
+              <MenuItem key={t.name} value={t.name}>
+                {t.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-        <select value={selectedAbility} onChange={(e) => setSelectedAbility(e.target.value)}>
-          <option value="">-- Selecciona una habilidad --</option>
-          {abilities.map((ability) => (
-            <option key={ability.name} value={ability.name}>
-              {ability.name}
-            </option>
-          ))}
-        </select>
+        {/* Select de habilidad */}
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="label-habilidad">Habilidad</InputLabel>
+          <Select
+            labelId="label-habilidad"
+            value={selectedAbility}
+            label="Habilidad"
+            onChange={(e) => setSelectedAbility(e.target.value)}
+          >
+            <MenuItem value="">
+              <em>Todos</em>
+            </MenuItem>
+            {abilities.map((a) => (
+              <MenuItem key={a.name} value={a.name}>
+                {a.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-        <button onClick={handleFilter}>Filtrar</button>
-      </div>
+        {/* Botón de filtrar */}
+        <Button
+          variant="contained"
+          size="large"
+          onClick={handleFilter}
+          sx={{ height: 56 }}
+        >
+          Filtrar
+        </Button>
+      </Box>
 
-      <hr />
+      
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-    </div>
+      {/* Error */}
+      {error && (
+        <Typography variant="body2" color="error" align="center">
+          {error}
+        </Typography>
+      )}
+    </Box>
   );
 };

@@ -1,3 +1,5 @@
+import { Box, Button, Card, CardActionArea, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
+
 export const PokemonDetail = ({
   pokemon,
   id,
@@ -6,50 +8,91 @@ export const PokemonDetail = ({
 }) => {
 
   return (
-    <>
+     <>
       {pokemon && (
-        <div>
-          <h2>{pokemon.name}</h2>
-          <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
-          <p>Id: {pokemon.id}</p>
-          <p>Altura: {pokemon.height}</p>
-          <p>Peso: {pokemon.weight}</p>
+        
+        <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
+            
+          <Card
+            sx={{
+              width: '70%',
+            }}
+          >
+            <CardActionArea>
+            <Typography
+              align="center"
+              variant="h3"
+              sx={{ textTransform: 'uppercase', mb: 2 }}
+            >
+              {pokemon.name}
+            </Typography>
 
-          <h3>Tipos</h3>
-          <ul>
-            {pokemon.types.map((typeObj) => (
-              <li key={typeObj.type.name}>{typeObj.type.name}</li>
-            ))}
-          </ul>
+            <CardMedia
+              component="img"
+              image={pokemon.sprites.front_default}
+              alt={pokemon.name}
+              sx={{ width: 200, height: 200, mx: 'auto', mb: 2 }}
+            />
 
-          <h3>Habilidades</h3>
-          <ul>
-            {pokemon.abilities.map((abilityObj) => (
-              <li key={abilityObj.ability.name}>{abilityObj.ability.name}</li>
-            ))}
-          </ul>
+            <CardContent sx={{ textAlign: 'center' }}>
+              <Typography><strong>Id:</strong> {pokemon.id}</Typography>
+              <Typography><strong>Altura:</strong> {pokemon.height}</Typography>
+              <Typography><strong>Peso:</strong> {pokemon.weight}</Typography>
 
-          <h3>Estadísticas Base</h3>
-          <ul>
-            {pokemon.stats.map((statObj) => (
-              <li key={statObj.stat.name}>
-                {statObj.stat.name}: {statObj.base_stat}
-              </li>
-            ))}
-          </ul>
+              {/* 2) Listas sin puntos */}
+              <Typography variant="h6" sx={{ mt: 2 }}>Tipos</Typography>
+              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+                {pokemon.types.map((typeObj) => (
+                  <Box component="li" key={typeObj.type.name}>
+                    {typeObj.type.name}
+                  </Box>
+                ))}
+              </Box>
 
-          <h3>Movimientos (primeros 5)</h3>
-          <ul>
-            {pokemon.moves.slice(0, 5).map((moveObj) => (
-              <li key={moveObj.move.name}>{moveObj.move.name}</li>
-            ))}
-          </ul>
+              <Typography variant="h6" sx={{ mt: 2 }}>Habilidades</Typography>
+              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+                {pokemon.abilities.map((abilityObj) => (
+                  <Box component="li" key={abilityObj.ability.name}>
+                    {abilityObj.ability.name}
+                  </Box>
+                ))}
+              </Box>
 
-          <button onClick={handleAnterior} disabled={id === 1}>
-            Anterior
-          </button>
-          <button onClick={handleSiguiente}>Siguiente</button>
-        </div>
+              <Typography variant="h6" sx={{ mt: 2 }}>Estadísticas Base</Typography>
+              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+                {pokemon.stats.map((statObj) => (
+                  <Box component="li" key={statObj.stat.name}>
+                    {statObj.stat.name}: {statObj.base_stat}
+                  </Box>
+                ))}
+              </Box>
+
+              <Typography variant="h6" sx={{ mt: 2 }}>Movimientos (primeros 5)</Typography>
+              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+                {pokemon.moves.slice(0, 5).map((moveObj) => (
+                  <Box component="li" key={moveObj.move.name}>
+                    {moveObj.move.name}
+                  </Box>
+                ))}
+              </Box>
+            </CardContent>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, p: 2 }}>
+              <Button
+                variant="outlined"
+                onClick={handleAnterior}
+                disabled={id === 1}
+              >
+                Anterior
+              </Button>
+              <Button variant="outlined" onClick={handleSiguiente}>
+                Siguiente
+              </Button>
+            </Box>
+            </CardActionArea>
+          </Card>
+          
+        </Box>
       )}
     </>
   );
