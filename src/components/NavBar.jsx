@@ -10,7 +10,7 @@ export const NavBar = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Link to="/" style={{ textDecoration: "none" }}>
+              <Link to="/app-react-pokedex" style={{ textDecoration: "none" }}>
               <motion.img
                   src={logo}
                   alt="Logo"
