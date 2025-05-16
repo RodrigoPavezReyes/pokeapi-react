@@ -32,7 +32,7 @@ export const HomePage = () => {
             setCurrentList(data);
             setNextUrl(data.next);
             setPrevUrl(data.previous);
-            console.log(data)
+            
     })
     }, [url])
     

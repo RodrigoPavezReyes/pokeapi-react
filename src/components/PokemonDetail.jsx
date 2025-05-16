@@ -1,5 +1,14 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 
+const container = (delay)=> ({
+    hidden: {x: -100, opacity:0},
+    visible : {
+        x:0,
+        opacity:1,
+        transition: {duration: 0.6, delay:delay}
+    }
+})
 export const PokemonDetail = ({
   pokemon,
   id,
@@ -13,85 +22,88 @@ export const PokemonDetail = ({
         
         <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
             
-          <Card
-            sx={{
-              width: '50%',
-              borderRadius: '16px',
-            }}
-          >
-            <CardActionArea>
-            <Typography
-              align="center"
-              variant="h3"
-              sx={{ textTransform: 'uppercase', mb: 3 }}
-            >
-              {pokemon.name}
-            </Typography>
+          <Card sx={{ width: '50%', borderRadius: '16px' }}>
+  <CardActionArea>
+    <motion.div
+        variants={container(0.2)}
+                                    initial="hidden"
+                                    animate="visible"
+    >
+    <Typography
+      align="center"
+      variant="h3"
+      sx={{ textTransform: 'uppercase', mb: 3, mt: 5 }}
+    >
+      {pokemon.name}
+    </Typography>
+    </motion.div>
+    <motion.img
+  src={pokemon.sprites.other['official-artwork'].front_default}
+  alt={pokemon.name}
+  initial={{ x: 5, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  transition={{ duration: 2, delay: 0.2 }}
+  style={{ width: 200, height: 200, margin: '0 auto 16px', display: 'block' }}
+/>
 
-            <CardMedia
-              component="img"
-              image={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              sx={{ width: 200, height: 200, mx: 'auto', mb: 2 }}
-            />
+    <CardContent sx={{ textAlign: 'center' }}>
+      <Typography><strong>Id:</strong> {pokemon.id}</Typography>
+      <Typography><strong>Altura:</strong> {pokemon.height}</Typography>
+      <Typography><strong>Peso:</strong> {pokemon.weight}</Typography>
 
-            <CardContent sx={{ textAlign: 'center' }}>
-              <Typography><strong>Id:</strong> {pokemon.id}</Typography>
-              <Typography><strong>Altura:</strong> {pokemon.height}</Typography>
-              <Typography><strong>Peso:</strong> {pokemon.weight}</Typography>
+      <Typography variant="h6" sx={{ mt: 2 }}>Tipos</Typography>
+      <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+        {pokemon.types.map((typeObj) => (
+          <Box component="li" key={typeObj.type.name}>
+            {typeObj.type.name}
+          </Box>
+        ))}
+      </Box>
 
-              {/* 2) Listas sin puntos */}
-              <Typography variant="h6" sx={{ mt: 2 }}>Tipos</Typography>
-              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {pokemon.types.map((typeObj) => (
-                  <Box component="li" key={typeObj.type.name}>
-                    {typeObj.type.name}
-                  </Box>
-                ))}
-              </Box>
+      <Typography variant="h6" sx={{ mt: 2 }}>Habilidades</Typography>
+      <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+        {pokemon.abilities.map((abilityObj) => (
+          <Box component="li" key={abilityObj.ability.name}>
+            {abilityObj.ability.name}
+          </Box>
+        ))}
+      </Box>
 
-              <Typography variant="h6" sx={{ mt: 2 }}>Habilidades</Typography>
-              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {pokemon.abilities.map((abilityObj) => (
-                  <Box component="li" key={abilityObj.ability.name}>
-                    {abilityObj.ability.name}
-                  </Box>
-                ))}
-              </Box>
+      <Typography variant="h6" sx={{ mt: 2 }}>Estadísticas Base</Typography>
+      <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+        {pokemon.stats.map((statObj) => (
+          <Box component="li" key={statObj.stat.name}>
+            {statObj.stat.name}: {statObj.base_stat}
+          </Box>
+        ))}
+      </Box>
 
-              <Typography variant="h6" sx={{ mt: 2 }}>Estadísticas Base</Typography>
-              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {pokemon.stats.map((statObj) => (
-                  <Box component="li" key={statObj.stat.name}>
-                    {statObj.stat.name}: {statObj.base_stat}
-                  </Box>
-                ))}
-              </Box>
+      <Typography variant="h6" sx={{ mt: 2 }}>Movimientos (primeros 5)</Typography>
+      <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+        {pokemon.moves.slice(0, 5).map((moveObj) => (
+          <Box component="li" key={moveObj.move.name}>
+            {moveObj.move.name}
+          </Box>
+        ))}
+      </Box>
+    </CardContent>
+  </CardActionArea>
 
-              <Typography variant="h6" sx={{ mt: 2 }}>Movimientos (primeros 5)</Typography>
-              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {pokemon.moves.slice(0, 5).map((moveObj) => (
-                  <Box component="li" key={moveObj.move.name}>
-                    {moveObj.move.name}
-                  </Box>
-                ))}
-              </Box>
-            </CardContent>
+  {/* ✅ Botones FUERA del CardActionArea */}
+  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, p: 2 }}>
+    <Button
+      variant="outlined"
+      onClick={handleAnterior}
+      disabled={id === 1}
+    >
+      Anterior
+    </Button>
+    <Button variant="outlined" onClick={handleSiguiente}>
+      Siguiente
+    </Button>
+  </Box>
+</Card>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, p: 2 }}>
-              <Button
-                variant="outlined"
-                onClick={handleAnterior}
-                disabled={id === 1}
-              >
-                Anterior
-              </Button>
-              <Button variant="outlined" onClick={handleSiguiente}>
-                Siguiente
-              </Button>
-            </Box>
-            </CardActionArea>
-          </Card>
           
         </Box>
       )}

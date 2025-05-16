@@ -9,6 +9,16 @@ import {
   MenuItem,
   Button,
 } from '@mui/material';
+import { motion } from "framer-motion"
+
+const container = (delay)=> ({
+    hidden: {x: -100, opacity:0},
+    visible : {
+        x:0,
+        opacity:1,
+        transition: {duration: 0.6, delay:delay}
+    }
+})
 
 export const PokemonFilterCombined = () => {
   const [types, setTypes] = useState([]);
@@ -75,7 +85,15 @@ export const PokemonFilterCombined = () => {
 };
 
   return (
-    <Box sx={{ p: 2, width: '100%', borderRadius: 2,  }}>
+    <motion.div
+    variants={container(0)}
+                                    initial="hidden"
+                                    animate="visible">
+
+
+    
+    <Box 
+    sx={{ p: 2, width: '100%', borderRadius: 2,  }}>
       {/* Título */}
       <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>
         Encuentra tu Pokemon por Tipo y Habilidad
@@ -144,5 +162,6 @@ export const PokemonFilterCombined = () => {
         </Typography>
       )}
     </Box>
+    </motion.div>
   );
 };

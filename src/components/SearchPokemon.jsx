@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button } from '@mui/material';
+import { motion } from "framer-motion"
+
+const container = (delay)=> ({
+    hidden: {x: -100, opacity:0},
+    visible : {
+        x:0,
+        opacity:1,
+        transition: {duration: 0.6, delay:delay}
+    }
+})
 
 export const SearchPokemon = () => {
   const [inputValue, setInputValue] = useState("");
@@ -15,6 +25,11 @@ export const SearchPokemon = () => {
   };
 
   return (
+    <motion.div
+    variants={container(0.5)}
+                                    initial="hidden"
+                                    animate="visible">
+                                      
     <Box
       component="form"
       onSubmit={handleSubmit}
@@ -53,5 +68,6 @@ export const SearchPokemon = () => {
         Buscar
       </Button>
     </Box>
+    </motion.div>
   );
 };
