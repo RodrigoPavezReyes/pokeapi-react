@@ -37,6 +37,7 @@ export const PokemonList = ({ currentList }) => {
               transition: '0.2s',
               '&:hover': {
                 transform: 'scale(1.05)',
+                borderRadius: '16px',
               },
             }}
           >

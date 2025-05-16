@@ -15,7 +15,8 @@ export const PokemonDetail = ({
             
           <Card
             sx={{
-              width: '70%',
+              width: '50%',
+              borderRadius: '16px',
             }}
           >
             <CardActionArea>

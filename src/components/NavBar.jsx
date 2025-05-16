@@ -9,7 +9,7 @@ export const NavBar = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-  <Link to="/" style={{ textDecoration: "none" }}>
+  <Link to="/PokedexReact" style={{ textDecoration: "none" }}>
     <Box
       component="img"
       src={logo}

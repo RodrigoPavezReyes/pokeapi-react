@@ -59,7 +59,7 @@ export const DetailPage = () => {
           />
         </>
       )}
-      <Link to="/" style={{ textDecoration: "none" }}>
+      <Link to="/PokedexReact" style={{ textDecoration: "none" }}>
   <Button variant="contained" color="primary">
     Volver Home
   </Button>
